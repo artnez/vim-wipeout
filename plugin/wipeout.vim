@@ -22,7 +22,7 @@ function! Wipeout(bang)
     let l:cmd .= '!'
   endif
   for b in range(1, bufnr('$'))
-    if !getbufvar(buflisted(b), "&mod") && !has_key(visible, b)
+    if buflisted(b) && !getbufvar(b, "&mod") && !has_key(visible, b)
       let l:tally += 1
       exe l:cmd . ' ' . b
     endif
