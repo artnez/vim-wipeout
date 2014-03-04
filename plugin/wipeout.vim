@@ -27,5 +27,5 @@ function! Wipeout(bang)
       exe l:cmd . ' ' . b
     endif
   endfor
-  echon "Deleted " . l:tally . " buffers"
+  echon "Deleted " . l:tally . " buffer" . (l:tally == 1 ? "" : "s")
 endfun
