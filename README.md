@@ -9,3 +9,9 @@ Usage
 ```
 :Wipeout
 ```
+
+Alternatively, to wipe all buffers, including unlisted ones, use:
+
+```
+:WipeoutAll
+```
