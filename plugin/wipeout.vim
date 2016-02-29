@@ -24,7 +24,7 @@ function! Wipeout(bang, wipeUnlisted)
     let l:cmd .= '!'
   endif
   for b in range(1, bufnr('$'))
-    if (a:wipeUnlisted || buflisted(b)) && !has_key(visible, b)
+    if ((a:wipeUnlisted && bufexists(b)) || buflisted(b)) && !has_key(visible, b)
       if getbufvar(b, "&mod")
         let l:skips += 1
         continue
