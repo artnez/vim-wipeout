@@ -5,9 +5,10 @@
 "
 " Author: Artem Nezvigin <artem@artnez.com>
 
-command! -bang Wipeout :call Wipeout(<bang>0)
+command! -bang Wipeout :call Wipeout(<bang>0, 0)
+command! -bang WipeoutAll :call Wipeout(<bang>0, 1)
 
-function! Wipeout(bang)
+function! Wipeout(bang, wipeUnlisted)
   " figure out which buffers are visible in any tab
   let visible = {}
   for t in range(1, tabpagenr('$'))
@@ -23,7 +24,7 @@ function! Wipeout(bang)
     let l:cmd .= '!'
   endif
   for b in range(1, bufnr('$'))
-    if buflisted(b) && !has_key(visible, b)
+    if ((a:wipeUnlisted && bufexists(b)) || buflisted(b)) && !has_key(visible, b)
       if getbufvar(b, "&mod")
         let l:skips += 1
         continue
