@@ -7,14 +7,18 @@
 
 command! -bang Wipeout :call Wipeout(<bang>0)
 
-function! Wipeout(bang)
+function! Wipeout(bang, ...)
   " figure out which buffers are visible in any tab
-  let visible = {}
-  for t in range(1, tabpagenr('$'))
-    for b in tabpagebuflist(t)
-      let visible[b] = 1
+  if exists('a:1')
+    let visible = a:1
+  else
+    let visible = {}
+    for t in range(1, tabpagenr('$'))
+      for b in tabpagebuflist(t)
+        let visible[b] = 1
+      endfor
     endfor
-  endfor
+  endif
   " close any buffer that are loaded and not visible
   let l:tally = 0
   let l:skips = 0
